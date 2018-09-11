@@ -1,6 +1,6 @@
 //module imports
 import { Router } from 'express';
-import { chirpsStore } from '../chirpstore';
+import chirpsStore from '../chirpstore';
 
 let router = Router();
 
