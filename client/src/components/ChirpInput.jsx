@@ -19,7 +19,7 @@ class ChirpInput extends Component {
     };
 
     //method to handle the submission of the text input
-    //uses property onPost to send userChirpInfo to App.handlePost() method
+    //uses parent-sent property "onPost" to send userChirpInfo to Home.handlePost() method
     handlePost(e) {
         e.preventDefault();
         let userChirpInfo = {

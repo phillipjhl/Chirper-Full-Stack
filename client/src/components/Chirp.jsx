@@ -1,6 +1,7 @@
-//Function Component that returns a Chirp using props passed in.
-//Props: userName, chirpMsg
-
+/**
+ * Function Component that returns a Chirp using props passed in.
+ * Props: userName, chirpMsg
+ **/
 import React from 'react';
 
 function Chirp(props) {
