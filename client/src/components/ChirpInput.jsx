@@ -2,8 +2,6 @@
 //Posting adds new Chirp to timeline
 
 import React, { Component } from 'react';
-import 'isomorphic-fetch';
-import 'es6-promise';
 
 class ChirpInput extends Component {
     constructor(props) {

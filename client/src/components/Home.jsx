@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import 'isomorphic-fetch';
-import 'es6-promise';
 import ChirpInput from './ChirpInput';
 import Chirp from './Chirp';
 
