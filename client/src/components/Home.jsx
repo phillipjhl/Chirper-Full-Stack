@@ -10,15 +10,15 @@ class App extends Component {
             timeline: [
                 {
                     name: "Katrina",
-                    chirpMsg: "Hello World!"
+                    text: "Hello World!"
                 },
                 {
                     name: "Norah",
-                    chirpMsg: "Isn't it a nice day!?"
+                    text: "Isn't it a nice day!?"
                 },
                 {
                     name: "Mowgli",
-                    chirpMsg: "Meow."
+                    text: "Meow."
                 }
             ]
         }
@@ -27,23 +27,20 @@ class App extends Component {
         this.handlePost = this.handlePost.bind(this);
     }
 
-    // componentWillMount() {
-    //     fetch("http://localhost:3000/api/chirps")
-    //     .then(res => {
-    //         res.json();
-    //         console.log(res.body);
-    //     })
-    //     .then(obj => {
-    //         console.log(JSON.stringify(obj));
-    //     });
-    // }
+    componentDidMount() {
+        fetch("http://localhost:3000/api/chirps")
+        .then(res => res.json())
+        .then(obj => {
+            console.log(obj.val);
+        });
+    }
 
     //method to handle timeline update that is called on render()
     updateTimeline() {
         //maps over the state.timeline array to produce a list of Chirp Components
         let updatedTimeline = this.state.timeline.map(
             (val, index) => {
-                return <Chirp key={index} userName={val.name} chirpMsg={val.chirpMsg} />
+                return <Chirp key={index} userName={val.name} text={val.text} />
             });
         return updatedTimeline;
     } 

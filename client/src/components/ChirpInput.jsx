@@ -23,21 +23,18 @@ class ChirpInput extends Component {
     handlePost(e) {
         e.preventDefault();
         let userChirpInfo = {
-            name: "Phillip",
+            name: 'Phillip',
             text: this.state.msg
         }
+        this.setState({ msg: "" });
+        this.props.onPost(userChirpInfo);
         fetch("http://localhost:3000/api/chirps", {
             method: 'POST',
             body: JSON.stringify(userChirpInfo),
             headers:{
                 'Content-Type': 'application/json'
             }
-        })
-        .then(res => res.json())
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));;
-        this.setState({ msg: "" });
-        this.props.onPost(userChirpInfo);
+        }).catch(err=>console.log(error));
     };
 
     render() {
