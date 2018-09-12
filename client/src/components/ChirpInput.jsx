@@ -2,12 +2,14 @@
 //Posting adds new Chirp to timeline
 
 import React, { Component } from 'react';
+import 'isomorphic-fetch';
+import 'es6-promise';
 
 class ChirpInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            msg: ''
+            msg: ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.handlePost = this.handlePost.bind(this);
@@ -23,10 +25,20 @@ class ChirpInput extends Component {
     handlePost(e) {
         e.preventDefault();
         let userChirpInfo = {
-            name: 'Phillip',
-            chirpMsg: this.state.msg
+            name: "Phillip",
+            text: this.state.msg
         }
-        this.setState({ msg: '' });
+        fetch("http://localhost:3000/api/chirps", {
+            method: 'POST',
+            body: JSON.stringify(userChirpInfo),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));;
+        this.setState({ msg: "" });
         this.props.onPost(userChirpInfo);
     };
 

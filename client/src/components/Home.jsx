@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import 'isomorphic-fetch';
+import 'es6-promise';
 import ChirpInput from './ChirpInput';
 import Chirp from './Chirp';
 
@@ -26,6 +28,17 @@ class App extends Component {
         //function binding
         this.handlePost = this.handlePost.bind(this);
     }
+
+    // componentWillMount() {
+    //     fetch("http://localhost:3000/api/chirps")
+    //     .then(res => {
+    //         res.json();
+    //         console.log(res.body);
+    //     })
+    //     .then(obj => {
+    //         console.log(JSON.stringify(obj));
+    //     });
+    // }
 
     //method to handle timeline update that is called on render()
     updateTimeline() {
