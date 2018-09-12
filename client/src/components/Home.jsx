@@ -7,20 +7,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            timeline: [
-                {
-                    name: "Katrina",
-                    text: "Hello World!"
-                },
-                {
-                    name: "Norah",
-                    text: "Isn't it a nice day!?"
-                },
-                {
-                    name: "Mowgli",
-                    text: "Meow."
-                }
-            ]
+            timeline: []
         }
 
         //function binding
@@ -29,21 +16,35 @@ class App extends Component {
 
     componentDidMount() {
         fetch("http://localhost:3000/api/chirps")
-        .then(res => res.json())
-        .then(obj => {
-            console.log(obj.val);
-        });
+            .then(res => res.json())
+            .then(result => {
+                let updatedTimeline = [];
+                for (const id in result) {
+                    if (result[id].name !== undefined) {
+                        let data = {
+                            name: result[id].name,
+                            text: result[id].text
+                        }
+                        updatedTimeline.unshift(data);
+                    };
+                };
+                this.setState({
+                    timeline: updatedTimeline
+                });
+                console.log(this.state.timeline);
+            })
+            .catch(err => console.log(err));
     }
 
-    //method to handle timeline update that is called on render()
-    updateTimeline() {
+    // method to handle timeline update that is called on render()
+    chirpifyTimeline() {
         //maps over the state.timeline array to produce a list of Chirp Components
         let updatedTimeline = this.state.timeline.map(
             (val, index) => {
-                return <Chirp key={index} userName={val.name} text={val.text} />
+                return <Chirp key={index} id={index} userName={val.name} text={val.text} />
             });
         return updatedTimeline;
-    } 
+    }
 
     //method to handle the submitted user info and then add new object to the state.timeline array
     //prop userChirpInfo gets added to front of array
@@ -70,7 +71,7 @@ class App extends Component {
                 </div>
 
                 <div id="timeline" className="bg-light p-4" >
-                    {this.updateTimeline()}
+                    {this.chirpifyTimeline()}
                 </div>
 
             </Fragment>
