@@ -15,7 +15,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route path='/chirp/:id' component={ChirpPage} />
-                    <Route exact path='/chirp/:id/edit' component={ChirpEdit} />
+                    <Route path='/chirp/:id/edit' component={ChirpEdit} />
                 </Switch>
             </Fragment>
         </Router>

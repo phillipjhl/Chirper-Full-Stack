@@ -20,11 +20,14 @@ class App extends Component {
             .then(result => {
                 let updatedTimeline = [];
                 for (const id in result) {
+                    console.log(id);
                     if (result[id].name !== undefined) {
                         let data = {
+                            id: id,
                             name: result[id].name,
                             text: result[id].text
                         }
+                        console.log(data);
                         updatedTimeline.push(data);
                     };
                 };
@@ -39,8 +42,8 @@ class App extends Component {
     chirpifyTimeline() {
         //maps over the state.timeline array to produce a list of Chirp Components
         let updatedTimeline = this.state.timeline.map(
-            (val, index) => {
-                return <Chirp key={index} id={index} userName={val.name} text={val.text} />
+            (val) => {
+                return <Chirp key={val.id} id={val.id} userName={val.name} text={val.text} />
             });
         return updatedTimeline;
     }
