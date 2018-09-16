@@ -25,13 +25,12 @@ class App extends Component {
                             name: result[id].name,
                             text: result[id].text
                         }
-                        updatedTimeline.unshift(data);
+                        updatedTimeline.push(data);
                     };
                 };
                 this.setState({
                     timeline: updatedTimeline
                 });
-                console.log(this.state.timeline);
             })
             .catch(err => console.log(err));
     }
