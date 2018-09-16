@@ -20,14 +20,12 @@ class App extends Component {
             .then(result => {
                 let updatedTimeline = [];
                 for (const id in result) {
-                    console.log(id);
                     if (result[id].name !== undefined) {
                         let data = {
                             id: id,
                             name: result[id].name,
                             text: result[id].text
                         }
-                        console.log(data);
                         updatedTimeline.push(data);
                     };
                 };

@@ -34,7 +34,7 @@ class ChirpInput extends Component {
             headers:{
                 'Content-Type': 'application/json'
             }
-        }).catch(err=>console.log(error));
+        }).catch(err=>console.log(err));
     };
 
     render() {

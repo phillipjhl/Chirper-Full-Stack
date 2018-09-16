@@ -47,7 +47,7 @@ class ChirpPage extends Component {
                         </button>
                         <h5 className="card-title">{this.state.data.name}</h5>
                         <p className="card-text">{this.state.data.text}</p>
-                        <Link to="/chirp/:id/edit" className="btn btn-sm btn-secondary" >Edit</Link>
+                        <Link to={`/chirp/${this.props.match.params.id}/edit`} className="btn btn-sm btn-secondary" >Edit</Link>
                     </div>
                 </div>
             </div>
