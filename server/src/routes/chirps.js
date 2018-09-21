@@ -1,6 +1,16 @@
 //module imports
 import { Router } from 'express';
 import chirpsStore from '../chirpstore';
+import mysql from 'mysql';
+
+let connection = mysql.createConnection(
+    {
+        host: 'localhost',
+        database: 'chirpr',
+        user: 'chirprapp',
+        password: 'appauthentication'
+    }
+);
 
 let router = Router();
 
@@ -17,9 +27,19 @@ router.get('/:id?', (req, res) => {
 });
 
 //post router
-//save resource sent from client
+//post resource sent from client to database
+//req.body is the data object {name: '',text: ''}
 router.post('/', (req, res) => {
-    chirpsStore.CreateChirp(req.body);
+    connection.connect();
+    let chirp = req.body.text;
+    console.log(chirp);
+    connection.query(`INSERT INTO CHIRPS(userid, text, location) VALUES(1, '${chirp}', 'Birmingham')`, (err, results, fields) => {
+        if (err) {
+            connection.end();
+            return console.log(err);
+        }
+        connection.end()
+    });
     res.sendStatus(200);
 });
 
