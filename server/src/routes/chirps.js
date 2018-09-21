@@ -72,7 +72,7 @@ router.post('/', (req, res) => {
 //update resource with data sent from client
 router.put('/:id', (req, res) => {
     let id = req.params.id;
-    connection.query(`UPDATE CHIRPS SET TEXT = ${req.body.text} WHERE id=${id}`, (err, results, fields) => {
+    connection.query(`UPDATE CHIRPS SET TEXT = '${req.body.text}' WHERE id=${id}`, (err, results, fields) => {
         if (err) {
             return console.log(err);
         }

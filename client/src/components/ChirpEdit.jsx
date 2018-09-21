@@ -18,8 +18,8 @@ class ChirpEdit extends Component {
             .then(result => {
                 this.setState({
                     data: {
-                        name: result.name,
-                        text: result.text
+                        name: result[0].name,
+                        text: result[0].text
                     }
                 });
             })
