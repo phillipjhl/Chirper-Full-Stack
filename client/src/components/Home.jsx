@@ -19,16 +19,14 @@ class App extends Component {
             .then(res => res.json())
             .then(result => {
                 let updatedTimeline = [];
-                for (const id in result) {
-                    if (result[id].name !== undefined) {
-                        let data = {
-                            id: id,
-                            name: result[id].name,
-                            text: result[id].text
-                        }
-                        updatedTimeline.push(data);
-                    };
-                };
+                result.forEach(val => {
+                    let data = {
+                        id: val.id,
+                        name: val.name,
+                        text: val.text
+                    }
+                    updatedTimeline.push(data);
+                });
                 this.setState({
                     timeline: updatedTimeline
                 });
@@ -48,11 +46,24 @@ class App extends Component {
 
     //method to handle the submitted user info and then add new object to the state.timeline array
     //prop userChirpInfo gets added to front of array
-    handlePost(userChirpInfo) {
-        let userTimeline = this.state.timeline;
-        userTimeline.unshift(userChirpInfo);
-        this.setState({ timeline: userTimeline })
-
+    handlePost() {
+        fetch("http://localhost:3000/api/chirps")
+            .then(res => res.json())
+            .then(result => {
+                let updatedTimeline = [];
+                result.forEach(val => {
+                    let data = {
+                        id: val.id,
+                        name: val.name,
+                        text: val.text
+                    }
+                    updatedTimeline.push(data);
+                });
+                this.setState({
+                    timeline: updatedTimeline
+                });
+            })
+            .catch(err => console.log(err));
     }
 
     render() {

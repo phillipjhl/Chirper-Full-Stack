@@ -27,7 +27,7 @@ class ChirpInput extends Component {
             text: this.state.msg
         }
         this.setState({ msg: "" });
-        this.props.onPost(userChirpInfo);
+        this.props.onPost();
         fetch("http://localhost:3000/api/chirps", {
             method: 'POST',
             body: JSON.stringify(userChirpInfo),
