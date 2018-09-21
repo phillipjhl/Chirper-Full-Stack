@@ -34,7 +34,7 @@ router.get('/:id?', (req, res) => {
                     if (err) {
                         return console.log(err);
                     }
-                    res.send(results);
+                    res.json(results);
                 });
             // res.json(chirpsStore.GetChirp(id));
         } else {
@@ -60,7 +60,6 @@ router.get('/:id?', (req, res) => {
 //req.body is the data object {name: '',text: ''}
 router.post('/', (req, res) => {
     let chirp = req.body.text;
-    console.log(chirp);
     connection.query(`INSERT INTO CHIRPS(userid, text, location) VALUES(1, '${chirp}', 'Birmingham')`, (err, results, fields) => {
         if (err) {
             return console.log(err);
@@ -73,7 +72,6 @@ router.post('/', (req, res) => {
 //update resource with data sent from client
 router.put('/:id', (req, res) => {
     let id = req.params.id;
-    console.log(id);
     connection.query(`UPDATE CHIRPS SET TEXT = ${req.body.text} WHERE id=${id}`, (err, results, fields) => {
         if (err) {
             return console.log(err);
@@ -87,7 +85,11 @@ router.put('/:id', (req, res) => {
 //delete resource with requested id
 router.delete('/:id', (req, res) => {
     let id = req.params.id;
-    chirpsStore.DeleteChirp(id);
+    connection.query(`DELETE FROM CHIRPS WHERE id=${id}`, (err, results, fields)=>{
+        if (err) {
+            return console.log(err);
+        }
+    });
     res.sendStatus(200);
 });
 
