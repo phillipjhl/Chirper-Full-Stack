@@ -3,6 +3,7 @@ import { Router } from 'express';
 import chirpsStore from '../chirpstore';
 import mysql from 'mysql';
 
+//establish connection to mysqldb
 let connection = mysql.createConnection(
     {
         host: 'localhost',
@@ -18,11 +19,43 @@ let router = Router();
 //if it has id, respond with one 
 //else send all to client
 router.get('/:id?', (req, res) => {
+    connection.connect();
     let id = req.params.id;
     if (id) {
-        res.json(chirpsStore.GetChirp(id));
+        connection.query(`
+        select 
+            c.id,
+            u.name,
+            text
+        from chirps c
+        join users u on u.id=c.userid
+        where c.id=${id};`,
+         (err, results, fields) => {
+                if (err) {
+                    connection.end();
+                    return console.log(err);
+                }
+                connection.end()
+            });
+        // res.json(chirpsStore.GetChirp(id));
     } else {
-        res.send(chirpsStore.GetChirps())
+        connection.query(`
+        select 
+            c.id,
+            u.name,
+            text
+        from chirps c
+        join users u on u.id=c.userid
+        ORDER BY c.id DESC;`,
+         (err, results, fields) => {
+                if (err) {
+                    connection.end();
+                    return console.log(err);
+                }
+                connection.end()
+                res.send(results);
+            });
+        // res.send(chirpsStore.GetChirps())
     };
 });
 
@@ -47,7 +80,15 @@ router.post('/', (req, res) => {
 //update resource with data sent from client
 router.put('/:id', (req, res) => {
     let id = req.params.id;
-    chirpsStore.UpdateChirp(id, req.body);
+    console.log(id);
+    // connection.query(`UPDATE CHIRPS SET TEXT = ${req.body.text} WHERE id=${id}`, (err, results, fields) => {
+    //     if (err) {
+    //         connection.end();
+    //         return console.log(err);
+    //     }
+    //     connection.end()
+    // });
+    // chirpsStore.UpdateChirp(id, req.body);
     res.sendStatus(200);
 });
 
