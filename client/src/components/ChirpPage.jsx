@@ -39,8 +39,8 @@ class ChirpPage extends Component {
 
     render() {
         return (
-            <div className="container" >
-                <div className="card" >
+            <div className="container bg-light p-4" >
+                <div className="card col-sm-10" >
                     <div className="card-body">
                         <button type="button" className="close d-inline" onClick={this.handleClick} aria-label="Close">
                             <span aria-hidden="true">&times;</span>

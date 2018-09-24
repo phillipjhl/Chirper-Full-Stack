@@ -77,12 +77,16 @@ class App extends Component {
                     </div>
                 </div>
 
-                <div id="userinput" className="bg-primary p-4">
-                    <ChirpInput onPost={this.handlePost} />
+                <div id="userinput" className="container bg-primary p-4">
+                    <div className="col-sm-10">
+                        <ChirpInput onPost={this.handlePost} />
+                    </div>
                 </div>
 
-                <div id="timeline" className="bg-light p-4" >
-                    {this.chirpifyTimeline()}
+                <div id="timeline" className="container bg-light p-4" >
+                    <div className="col-sm-10">
+                        {this.chirpifyTimeline()}
+                    </div>
                 </div>
 
             </Fragment>

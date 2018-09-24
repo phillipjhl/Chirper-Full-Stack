@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 function Chirp(props) {
     return (
-        <div className="card" >
+        <div className="card m-2" >
             <div className="card-body">
                 <h5 className="card-title">{props.userName}</h5>
                 <p className="card-text">{props.text}</p>
